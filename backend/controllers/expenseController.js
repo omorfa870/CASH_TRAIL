@@ -25,7 +25,7 @@ exports.addExpense = async (req, res) => {
     }  catch (error) {
         res.status(500).json({message: "Server error"})
     }
-}
+};
 
 exports.getAllExpense = async (req, res) => {
     const userId = req.user._id;
@@ -36,7 +36,7 @@ exports.getAllExpense = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server Error' });
     }
-}
+};
 
 exports.deleteExpense = async (req, res) => {
     const userId = req.user._id;
@@ -78,4 +78,4 @@ exports.downloadExpenseExcel = async (req, res) => {
     }
 
 
-}
+};
