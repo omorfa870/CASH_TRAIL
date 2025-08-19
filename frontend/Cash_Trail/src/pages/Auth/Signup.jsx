@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import AuthLayout from '../../components/layouts/AuthLayout';
 import Input from '../../components/Inputs/Input';
 import { validateEmail } from "../../utils/helper";
 import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
+import { UserContext } from '../../context/UserContext';
+import uploadImage from "../../utils/uploadImage";
+
 
 function Signup() {
   const [profilePic, setProfilePic] = useState(null);
@@ -12,6 +17,8 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
+  const { updateUser} = useContext(UserContext);
+  const navigate = useNavigate();
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -25,10 +32,41 @@ function Signup() {
       return;
     }
 
-    setError(null);
-    console.log("Signup data:", { fullName, email, password, profilePic });
-    // later -> send to backend
+    setError("");
+    
+    // Signup API call
+    try {
+      let  profilePicture = "";
+      //Upload profile pic if present
+       if (profilePic) {
+         const imgUploadRes = await uploadImage(profilePic);
+         profilePicture = imgUploadRes.imageUrl || "";
+      }
+
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+        fullName,
+        email,
+        password,
+        profilePicture
+      });
+
+      const { token, user } = response.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUser(user);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("An error occurred during signup.");
+    }
+    }
   };
+      
 
   return (
     <AuthLayout>
