@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Expence() {
+const Expence = () => {
   return (
     <div>Expence</div>
   )
