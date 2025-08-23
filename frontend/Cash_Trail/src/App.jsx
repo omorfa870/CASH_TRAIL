@@ -12,9 +12,11 @@ import Home from "./pages/Dashboard/Home";
 import Income from "./pages/Dashboard/Income";
 import Expence from  "./pages/Dashboard/Expence";
 import UserProvider from "./context/UserContext";
+import { Toaster } from "react-hot-toast";
 
 
 const App = () => {
+  console.log("App");
   return (
     <UserProvider> 
     <div>
@@ -29,6 +31,15 @@ const App = () => {
         </Routes>
       </Router>    
     </div>
+
+    <Toaster
+      toastOptiions={{
+        className: "",
+        style: {
+          fontSize: "13px"
+        },
+      }}
+      />
     </UserProvider>
   );
 };
@@ -36,6 +47,8 @@ const App = () => {
 export default App;
 
 const Root = () => {
+
+   console.log("App");
 
   const isAuthenticated = !!localStorage.getItem("token");
   return isAuthenticated ? (

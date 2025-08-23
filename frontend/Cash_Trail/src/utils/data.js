@@ -15,14 +15,14 @@ export const SIDE_MENU_DATA = [
     {
         id:"02",
         label:"Income",
-        icon:  LuWalletMinimal,
+        icon: LuWalletMinimal,
         link:"/income",
     },
     {
         id:"03",
-        label:"Expence",
+        label:"Expense",   // ✅ fixed spelling
         icon: LuHandCoins,
-        link:"/expence",
+        link:"/expense",   // ✅ must match App.jsx
     },
     {
         id:"06",
@@ -30,5 +30,4 @@ export const SIDE_MENU_DATA = [
         icon: LuLogOut,
         link:"logout",
     },
-
-]
+];

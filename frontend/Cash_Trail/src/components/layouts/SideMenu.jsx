@@ -56,7 +56,7 @@ const SideMenu = ({ activeMenu }) => {
               ? "text-white bg-primary"
               : "text-gray-700 hover:bg-gray-100"
           } py-3 px-6 rounded-lg mb-3 transition`}
-          onClick={() => handleClick(item.path)}
+          onClick={() => handleClick(item.link)}   
         >
           <item.icon className="text-xl" />
           {item.label}
