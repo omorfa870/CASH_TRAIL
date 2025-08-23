@@ -2,7 +2,7 @@ import React , { useState } from 'react'
 import {HiOutlineMenu, HiOutlineX} from 'react-icons/hi'
 import SideMenu from './SideMenu';
 
-const Navbar = ({ activeMenu }) => {   // ✅ accept activeMenu as prop
+const Navbar = ({ activeMenu }) => {  
     const [openSideMenu, setOpenSideMenu] = useState(false);
 
     return (
@@ -20,11 +20,12 @@ const Navbar = ({ activeMenu }) => {   // ✅ accept activeMenu as prop
         )}
         </button>
 
-        <h2 className='text-lg font-medium text-black'>Cash Trail</h2>
+        <h2 className="text-3xl font-semibold text-blue-900">Cash Trail</h2>
+
 
         {openSideMenu && (
             <div className='fixed top-[61px] -ml-4 bg-white'>
-                <SideMenu activeMenu={activeMenu} />  {/* ✅ now it works */}
+                <SideMenu activeMenu={activeMenu} />  
             </div>
         )}
      </div>
